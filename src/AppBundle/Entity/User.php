@@ -20,4 +20,42 @@ class User extends BaseUser
         parent::__construct();
         // your own logic
     }
+	
+	/**
+    * @ORM\OneToMany(targetEntity="...\Entity\Friend", inversedBy="user")
+    */
+	protected $friends;
+     
+    /**
+     * Add friends
+     *
+     * @param ...\Friend $friends
+     * @return user
+     */
+    public function addFriend(\...\Entity\Friend $friends)
+    {
+        $this->friends[] = $friends;
+     
+        return $this;
+    }
+     
+    /**
+     * Remove friends
+     *
+     * @param ...\Entity\Friend $friends
+     */
+    public function removeFriend(\...Entity\Friend $friends)
+    {
+        $this->friends->removeElement($friends);
+    }
+     
+    /**
+     * Get friends
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getFriends()
+    {
+        return $this->friends;
+    } 
 }
